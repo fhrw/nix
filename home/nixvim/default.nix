@@ -12,6 +12,8 @@
     ./format.nix
     ./lint.nix
     ./icons.nix
+    ./ft.nix
+    ./surround.nix
     # ./debug.nix
   ];
 

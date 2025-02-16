@@ -19,6 +19,7 @@ in
     ./home/direnv.nix
     ./home/emacs
     ./home/jj.nix
+    ./home/newsboat.nix
   ];
 
   home.username = "felix";

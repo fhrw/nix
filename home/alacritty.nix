@@ -9,7 +9,7 @@
           family = "Iosevka";
           style = "Regular";
         };
-        size = 12;
+        size = 14;
       };
       env = {
         WINIT_X11_SCALE_FACTOR = "1.0";
