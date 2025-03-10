@@ -73,7 +73,7 @@
       yamllint
       # Debuggers / misc deps
       asm-lsp
-      bashdb
+      (if stdenv.isDarwin then null else bashdb )
       clang-tools
       delve
       fd
@@ -83,12 +83,12 @@
       llvmPackages_17.bintools-unwrapped
       marksman
 
-      (nerdfonts.override {
-        fonts = [
-          "JetBrainsMono"
-          "RobotoMono"
-        ];
-      })
+      # (nerdfonts.override {
+      # fonts = [
+      #    "JetBrainsMono"
+      #    "RobotoMono"
+      #  ];
+      # })
 
       python3
       ripgrep
