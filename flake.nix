@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -27,6 +32,7 @@
       home-manager,
       nixvim,
       nix-darwin,
+      mac-app-util,
       ...
     }:
     {
@@ -45,24 +51,32 @@
         ];
       };
 
-    darwinConfigurations = let
-      system = "aarch64-darwin";
-    in {
-        mbp = nix-darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            ./darwin.nix
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; inherit system; };
-              home-manager.backupFileExtension = "backup";
+      darwinConfigurations =
+        let
+          system = "aarch64-darwin";
+        in
+        {
+          mbp = nix-darwin.lib.darwinSystem {
+            inherit system;
+            modules = [
+              ./darwin.nix
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  inherit system;
+                };
+                home-manager.backupFileExtension = "backup";
+                home-manager.sharedModules = [
+                  mac-app-util.homeManagerModules.default
+                ];
 
-              home-manager.users.felix = import ./home.nix;
-            }
-          ];
+                home-manager.users.felix = import ./home.nix;
+              }
+            ];
+          };
         };
-      };
     };
 }

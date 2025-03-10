@@ -5,17 +5,18 @@
   system,
   ...
 }:
- let
-   neovimconfig = import ./home/nixvim;
-   nvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
-     inherit pkgs;
-     module = neovimconfig;
-   };
- in
+let
+  neovimconfig = import ./home/nixvim;
+  nvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
+    inherit pkgs;
+    module = neovimconfig;
+  };
+in
 {
   imports = [
     ./home/i3
     ./home/alacritty.nix
+    ./home/wezterm.nix
     ./home/fish.nix
     ./home/direnv.nix
     ./home/emacs
