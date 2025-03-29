@@ -186,11 +186,14 @@
       	on_attach = function()
       		set_cmn_lsp_keybinds()
       	end,
+      	root_dir = function(fname)
+      		return vim.loop.cwd()
+      	end,
       	settings = {
       		purescript = {
       			addSpagoSources = true
-      		}
-      	},
+      		},
+      	}
       })
 
       -- Typescript/Javascript LSP
