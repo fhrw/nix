@@ -28,6 +28,7 @@
       relativenumber = true;
       shiftwidth = 2;
       tabstop = 2;
+      expandtab = true;
       wrap = false;
       swapfile = false; # Undotree
       backup = false; # Undotree
@@ -36,7 +37,7 @@
       incsearch = true;
       termguicolors = true;
       scrolloff = 8;
-      signcolumn = "yes";
+      signcolumn = "no";
       updatetime = 50;
       foldlevelstart = 99;
     };
@@ -46,7 +47,6 @@
       oil.enable = true;
       undotree.enable = true;
       fugitive.enable = true;
-      nvim-tree.enable = true;
     };
     extraPackages = with pkgs; [
       # Formatters
@@ -73,7 +73,7 @@
       yamllint
       # Debuggers / misc deps
       asm-lsp
-      (if stdenv.isDarwin then null else bashdb )
+      (if stdenv.isDarwin then null else bashdb)
       clang-tools
       delve
       fd
@@ -82,13 +82,6 @@
       lldb_17
       llvmPackages_17.bintools-unwrapped
       marksman
-
-      # (nerdfonts.override {
-      # fonts = [
-      #    "JetBrainsMono"
-      #    "RobotoMono"
-      #  ];
-      # })
 
       python3
       ripgrep
