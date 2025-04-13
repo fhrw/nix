@@ -15,18 +15,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  # networking.wireless.networks = {
-  #   Telstra039581 = {
-  #     psk = "va4eb6spmc";
-  #   };
-  #   "Felix's iPhone" = {
-  #     psk = "c3p0lives";
-  #   };
-  #   WiFi-F929-5G = {
-  #     psk = "99457136";
-  #   };
-  # };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -59,6 +47,8 @@
     variant = "";
   };
 
+  # environment.etc."wallpaper.jpg".source = ./wallpaper.jpg;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.felix = {
     isNormalUser = true;
@@ -68,20 +58,14 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ ];
+    packages = [ ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  services.xserver = {
-    enable = true;
-    windowManager.i3.enable = true;
-  };
-
-  services.displayManager = {
-    defaultSession = "none+i3";
-  };
+  security.polkit.enable = true;
+  hardware.graphics.enable = true;
 
   powerManagement.enable = true;
 
@@ -108,18 +92,22 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     wget
-    i3
     fish
     firefox
     alsa-utils
     pulseaudio
     pulseaudio-ctl
     home-manager
-    alacritty
     nixd
   ];
 
   environment.variables.EDITOR = "vim";
+
+  environment.etc = {
+    wallpaper = {
+      source = ./wallpaper.jpg;
+    };
+  };
 
   fonts.fontDir.enable = true;
 
