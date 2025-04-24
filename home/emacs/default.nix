@@ -9,9 +9,10 @@
         consult
         corfu
         vertico
-        meow
         eglot
         paredit
+	evil
+	evil-collection
       ];
   };
 }

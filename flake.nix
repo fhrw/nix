@@ -2,17 +2,28 @@
   description = "Felix's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.11";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -20,6 +31,8 @@
       nixpkgs,
       home-manager,
       nixvim,
+      nix-darwin,
+      mac-app-util,
       ...
     }:
     {
@@ -37,5 +50,33 @@
           }
         ];
       };
+
+      darwinConfigurations =
+        let
+          system = "aarch64-darwin";
+        in
+        {
+          mbp = nix-darwin.lib.darwinSystem {
+            inherit system;
+            modules = [
+              ./darwin.nix
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  inherit system;
+                };
+                home-manager.backupFileExtension = "backup";
+                home-manager.sharedModules = [
+                  mac-app-util.homeManagerModules.default
+                ];
+
+                home-manager.users.felix = import ./home.nix;
+              }
+            ];
+          };
+        };
     };
 }

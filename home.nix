@@ -2,11 +2,12 @@
   config,
   pkgs,
   inputs,
+  system,
   ...
 }:
 let
   neovimconfig = import ./home/nixvim;
-  nvim = inputs.nixvim.legacyPackages.x86_64-linux.makeNixvimWithModule {
+  nvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
     inherit pkgs;
     module = neovimconfig;
   };
@@ -15,15 +16,17 @@ in
   imports = [
     ./home/i3
     ./home/alacritty.nix
+    ./home/wezterm.nix
     ./home/fish.nix
     ./home/direnv.nix
     ./home/emacs
     ./home/jj.nix
     ./home/newsboat.nix
+    ./home/tmux.nix
   ];
 
   home.username = "felix";
-  home.homeDirectory = "/home/felix";
+  # home.homeDirectory = "/Users/felix";
 
   home.packages = with pkgs; [
     nnn

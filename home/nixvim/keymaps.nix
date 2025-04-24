@@ -2,6 +2,16 @@
 {
   keymaps = [
     {
+      key = "jk";
+      mode = "i";
+      action = "<Esc>";
+      options = {
+        silent = true;
+        noremap = true;
+        desc = "exit normal mode";
+      };
+    }
+    {
       key = "<C-h>";
       mode = "n";
       action = "<C-w>h";
@@ -253,7 +263,7 @@
       };
     }
     {
-      key = "<leader>da";
+      key = "<leader>c";
       mode = "n";
       action = ":lua vim.lsp.buf.code_action()<CR>";
       options = {
