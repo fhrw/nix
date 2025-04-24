@@ -22,6 +22,7 @@ in
     ./home/emacs
     ./home/jj.nix
     ./home/newsboat.nix
+    ./home/tmux.nix
   ];
 
   home.username = "felix";

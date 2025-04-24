@@ -15,18 +15,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  # networking.wireless.networks = {
-  #   Telstra039581 = {
-  #     psk = "va4eb6spmc";
-  #   };
-  #   "Felix's iPhone" = {
-  #     psk = "c3p0lives";
-  #   };
-  #   WiFi-F929-5G = {
-  #     psk = "99457136";
-  #   };
-  # };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

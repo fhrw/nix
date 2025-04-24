@@ -5,8 +5,8 @@
     settings.formatters_by_ft = {
       asm = [ "asmfmt" ];
       css = [
-        "prettierd"
         "prettier"
+        "prettierd"
       ];
       go = [
         "goimports"
